@@ -5,7 +5,9 @@
 #include "Helix/Events/MouseEvent.h"
 #include "Helix/Events/KeyEvent.h"
 
-#include <Glad/glad.h>
+#include "Platform/OpenGL/OpenGLContext.h"
+
+
 
 namespace Helix {
 
@@ -37,20 +39,29 @@ namespace Helix {
 		m_Data.Width = props.Width;
 		m_Data.Height = props.Height;
 
-		HX_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
+		
 
+		HX_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
+		
+		
+		
 		if (!s_GLFWInitialized)
 		{
 			int success = glfwInit();
 			HX_CORE_ASSERT(success, "Could not intialize GLFW!");
+
 			glfwSetErrorCallback(GLFWErrorCallback);
 			s_GLFWInitialized = true;
 		}
 
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
-		glfwMakeContextCurrent(m_Window);
-		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		HX_CORE_ASSERT(status,"Failed to intialize Glad!");
+		
+
+		m_Context = new OpenGLContext(m_Window);
+		m_Context->Init();
+
+
+
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 
@@ -153,7 +164,8 @@ namespace Helix {
 	void WindowsWindow::OnUpdate()
 	{
 		glfwPollEvents();
-		glfwSwapBuffers(m_Window);
+		m_Context->SwapBuffers();
+
 	}
 
 	void WindowsWindow::SetVSync(bool enabled)

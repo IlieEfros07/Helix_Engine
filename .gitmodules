@@ -6,4 +6,4 @@
 	url = https://github.com/g-truc/glm
 [submodule "Helix/vendor/imgui"]
 	path = Helix/vendor/imgui
-	url = https://github.com/IlieEfros07/imgui
+	url = https://github.com/Kartikkain/imgui

@@ -164,9 +164,11 @@
     <ClInclude Include="src\Helix\LayerStack.h" />
     <ClInclude Include="src\Helix\Log.h" />
     <ClInclude Include="src\Helix\MouseButtonCodes.h" />
-    <ClInclude Include="src\Helix\Platform\Windows\WindowsInput.h" />
-    <ClInclude Include="src\Helix\Platform\Windows\WindowsWindow.h" />
+    <ClInclude Include="src\Helix\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Helix\Window.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\hxpch.h" />
     <ClInclude Include="vendor\glm\glm\common.hpp" />
     <ClInclude Include="vendor\glm\glm\detail\_features.hpp" />
@@ -594,8 +596,9 @@
     <ClCompile Include="src\Helix\Layer.cpp" />
     <ClCompile Include="src\Helix\LayerStack.cpp" />
     <ClCompile Include="src\Helix\Log.cpp" />
-    <ClCompile Include="src\Helix\Platform\Windows\WindowsInput.cpp" />
-    <ClCompile Include="src\Helix\Platform\Windows\WindowsWindow.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\hxpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

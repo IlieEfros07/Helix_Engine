@@ -2,8 +2,10 @@
 
 #include "Helix/Window.h"
 
-#include <GLFW/glfw3.h>
 
+#include "Helix/Renderer/GraphicsContext.h"
+
+#include <GLFW/glfw3.h>
 namespace Helix {
 
 	class WindowsWindow : public Window
@@ -28,6 +30,7 @@ namespace Helix {
 		virtual void Shutdown();
 	private:
 		GLFWwindow* m_Window;
+		GraphicsContext* m_Context;
 
 		struct WindowData
 		{
