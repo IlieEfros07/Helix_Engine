@@ -11,6 +11,8 @@
 
 #include "Helix/Renderer/Shader.h"
 
+#include "Helix/Renderer/Buffer.h"
+
 namespace Helix {
 
 	class HELIX_API Application
@@ -40,8 +42,10 @@ namespace Helix {
 		LayerStack m_LayerStack;
 
 
-		unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
+		unsigned int m_VertexArray;
 		std::unique_ptr<Shader> m_Shader;
+		std::unique_ptr<VertexBuffer> m_VertexBuffer;
+		std::unique_ptr<IndexBuffer> m_IndexBuffer;
 
 	private:
 		static Application* s_Instance;
