@@ -1,33 +1,30 @@
 #pragma once
 
-
 #ifdef HX_PLATFOM_WINDOWS
 #if HX_DYNAMIC_LINK
-	#ifdef HX_BUILD_DLL
-		#define HELIX_API __declspec(dllexport)
-	#else
-		#define HELIX_API __declspec(dllimport)
-	#endif
+#ifdef HX_BUILD_DLL
+#define HELIX_API __declspec(dllexport)
 #else
-	#define HELIX_API	
+#define HELIX_API __declspec(dllimport)
 #endif
 #else
-	#error Helix only support Windows!
+#define HELIX_API
 #endif
-
+#else
+#error Helix only support Windows!
+#endif
 
 #ifdef HX_DEBUG
-	#define HX_ENABLE_ASSERTS
+#define HX_ENABLE_ASSERTS
 #endif
 
 #ifdef HX_ENABLE_ASSERTS
-	#define HX_ASSERT(x, ...) {if(!(x)) {HX_ERROR("Assertion Failed: {0}",__VA_ARGS__); __debugbreak(); } }
-	#define HX_CORE_ASSERT(x, ...){if(!(x)){HX_CORE_ERROR("Assertion Failed: {0}",__VA_ARGS__); __debugbreak();}}
+#define HX_ASSERT(x, ...) {if(!(x)) {HX_ERROR("Assertion Failed: {0}",__VA_ARGS__); __debugbreak(); } }
+#define HX_CORE_ASSERT(x, ...){if(!(x)){HX_CORE_ERROR("Assertion Failed: {0}",__VA_ARGS__); __debugbreak();}}
 #else
-	#define HX_ASSERT(x,...)
-	#define HX_CORE_ASSERT(x,...)
+#define HX_ASSERT(x,...)
+#define HX_CORE_ASSERT(x,...)
 #endif
-
 
 #define BIT(x) (1<<x)
 

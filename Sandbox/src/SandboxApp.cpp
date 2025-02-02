@@ -2,11 +2,9 @@
 
 #include "imgui.h"
 
-
 class ExampleLayer : public Helix::Layer {
-public: 
+public:
 	ExampleLayer() : Layer("Example") {
-
 	}
 	void OnUpdate() override {
 		//HX_INFO("ExampleLayer::Update");
@@ -14,13 +12,11 @@ public:
 			HX_TRACE("Tab key is pressed (poll)!");
 	}
 
-
 	void OnImGuiRender() override {
 		ImGui::Begin("test");
 		ImGui::Text("HelloWorld");
 		ImGui::End();
 	}
-
 
 	void OnEvent(Helix::Event& event) override {
 		//HX_TRACE("{0}", event);
@@ -31,20 +27,14 @@ public:
 	}
 };
 
-
-
-
 class Sandbox : public Helix::Application {
 public:
-	Sandbox(){
+	Sandbox() {
 		PushLayer(new ExampleLayer());
-
 	}
 	~Sandbox() {
-
 	}
 };
 Helix::Application* Helix::CreateApplication() {
 	return new Sandbox();
 }
-

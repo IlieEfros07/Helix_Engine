@@ -4,7 +4,6 @@
 #include "Helix/Core.h"
 
 namespace Helix {
-
 	// Events in Hazel are currently blocking, meaning when an event occurs it
 	// immediately gets dispatched and must be dealt with right then an there.
 	// For the future, a better strategy might be to buffer events in an event
@@ -15,7 +14,7 @@ namespace Helix {
 		None = 0,
 		WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
 		AppTick, AppUpdate, AppRender,
-		KeyPressed, KeyReleased,KeyTyped,
+		KeyPressed, KeyReleased, KeyTyped,
 		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
 	};
 
@@ -37,7 +36,6 @@ namespace Helix {
 
 	class HELIX_API Event
 	{
-
 	public:
 		bool Handled = false;
 		virtual EventType GetEventType() const = 0;

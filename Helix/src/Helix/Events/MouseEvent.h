@@ -3,7 +3,6 @@
 #include "Event.h"
 
 namespace Helix {
-
 	class HELIX_API MouseMovedEvent : public Event
 	{
 	public:
@@ -97,5 +96,4 @@ namespace Helix {
 
 		EVENT_CLASS_TYPE(MouseButtonReleased)
 	};
-
 }

@@ -3,7 +3,6 @@
 #include "Event.h"
 
 namespace Helix {
-
 	class HELIX_API KeyEvent : public Event
 	{
 	public:
@@ -60,8 +59,8 @@ namespace Helix {
 	{
 	public:
 		KeyTypedEvent(int keycode)
-			: KeyEvent(keycode) {}
-		
+			: KeyEvent(keycode) {
+		}
 
 		std::string ToString() const override
 		{
@@ -71,11 +70,5 @@ namespace Helix {
 		}
 
 		EVENT_CLASS_TYPE(KeyTyped)
-
 	};
-
-
-
 }
-
-

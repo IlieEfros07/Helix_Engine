@@ -14,7 +14,6 @@
 #include "Helix/Renderer/Buffer.h"
 
 namespace Helix {
-
 	class HELIX_API Application
 	{
 	public:
@@ -37,10 +36,8 @@ namespace Helix {
 		std::unique_ptr<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
 
-
 		bool m_Running = true;
 		LayerStack m_LayerStack;
-
 
 		unsigned int m_VertexArray;
 		std::unique_ptr<Shader> m_Shader;
@@ -53,5 +50,4 @@ namespace Helix {
 
 	// To be defined in CLIENT
 	Application* CreateApplication();
-
 }

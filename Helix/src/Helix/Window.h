@@ -6,7 +6,6 @@
 #include "Helix/Events/Event.h"
 
 namespace Helix {
-
 	struct WindowProps
 	{
 		std::string Title;
@@ -43,5 +42,4 @@ namespace Helix {
 
 		static Window* Create(const WindowProps& props = WindowProps());
 	};
-
 }

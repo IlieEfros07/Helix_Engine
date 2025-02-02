@@ -12,7 +12,6 @@
 #include <glad/glad.h>
 
 namespace Helix {
-
 	ImGuiLayer::ImGuiLayer()
 		: Layer("ImGuiLayer")
 	{
@@ -93,5 +92,4 @@ namespace Helix {
 		static bool show = true;
 		ImGui::ShowDemoWindow(&show);
 	}
-
 }

@@ -97,5 +97,4 @@ namespace Helix {
 	{
 		glUseProgram(0);
 	}
-
 }

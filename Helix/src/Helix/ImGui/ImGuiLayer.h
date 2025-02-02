@@ -6,8 +6,7 @@
 #include "Helix/Events/MouseEvent.h"
 
 namespace Helix {
-	class HELIX_API ImGuiLayer: public Layer {
-		
+	class HELIX_API ImGuiLayer : public Layer {
 	public:
 		ImGuiLayer();
 		~ImGuiLayer();

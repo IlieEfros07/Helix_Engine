@@ -1,7 +1,6 @@
 #pragma once
 
 namespace Helix {
-
 	enum class RendererAPI
 	{
 		None = 0, OpenGL = 1
@@ -13,5 +12,4 @@ namespace Helix {
 	private:
 		static RendererAPI s_RendererAPI;
 	};
-
 }

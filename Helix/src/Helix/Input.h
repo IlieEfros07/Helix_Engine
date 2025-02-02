@@ -3,9 +3,7 @@
 #include "Helix/Core.h"
 
 namespace Helix {
-
 	class HELIX_API Input {
-
 	public:
 		inline static bool IsKeyPressed(int keycode) { return s_Instance->IsKeyPressedImpl(keycode); }
 
@@ -23,6 +21,4 @@ namespace Helix {
 	private:
 		static Input* s_Instance;
 	};
-
-
 }

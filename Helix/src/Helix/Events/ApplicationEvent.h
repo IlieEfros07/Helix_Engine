@@ -3,7 +3,6 @@
 #include "Event.h"
 
 namespace Helix {
-
 	class HELIX_API WindowResizeEvent : public Event
 	{
 	public:

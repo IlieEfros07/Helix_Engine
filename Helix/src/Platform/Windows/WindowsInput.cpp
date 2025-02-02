@@ -4,17 +4,13 @@
 #include <GLFW/glfw3.h>
 
 namespace Helix {
-
-
 	Input* Input::s_Instance = new WindowsInput();
 
 	bool WindowsInput::IsKeyPressedImpl(int keycode)
 	{
-
-		auto window = static_cast<GLFWwindow*>( Application::Get().GetWindow().GetNativeWindow());
+		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 		auto state = glfwGetKey(window, keycode);
 		return state == GLFW_PRESS || state == GLFW_REPEAT;
-
 	}
 	std::pair<float, float> WindowsInput::GetMousePositionImpl()
 	{
@@ -22,8 +18,7 @@ namespace Helix {
 		double xpos, ypos;
 		glfwGetCursorPos(window, &xpos, &ypos);
 
-
-		return {(float)xpos,(float)ypos};
+		return { (float)xpos,(float)ypos };
 	}
 	bool WindowsInput::IsMouseButtonPressedImpl(int button)
 	{
@@ -33,10 +28,9 @@ namespace Helix {
 		return state = GLFW_PRESS;
 	}
 
-
 	float WindowsInput::GetMouseXImpl()
 	{
-		auto [x,y]= GetMousePositionImpl();
+		auto [x, y] = GetMousePositionImpl();
 
 		return x;
 	}

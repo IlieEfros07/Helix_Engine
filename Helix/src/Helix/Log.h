@@ -6,23 +6,18 @@
 #include "spdlog/fmt/ostr.h"
 
 namespace Helix {
-
 	class HELIX_API Log
 	{
 	public:
 		static void Init();
-
 
 		inline static std::shared_ptr<spdlog::logger>& GetCoreLogger() { return s_CoreLogger; }
 		inline static std::shared_ptr<spdlog::logger>& GetClientLogger() { return s_ClientLogger; }
 	private:
 		static std::shared_ptr<spdlog::logger>s_CoreLogger;
 		static std::shared_ptr<spdlog::logger>s_ClientLogger;
-
 	};
-	
 }
-
 
 //Core Log macros
 #define  HX_CORE_ERROR(...) ::Helix::Log::GetCoreLogger()->error(__VA_ARGS__)
@@ -37,7 +32,3 @@ namespace Helix {
 #define  HX_INFO(...)	::Helix::Log::GetClientLogger()->info(__VA_ARGS__)
 #define  HX_TRACE(...)	::Helix::Log::GetClientLogger()->trace(__VA_ARGS__)
 #define  HX_FATAL(...)	::Helix::Log::GetClientLogger()->fatal(__VA_ARGS__)
-
-
-
-

@@ -2,12 +2,10 @@
 
 #include "Helix/Window.h"
 
-
 #include "Helix/Renderer/GraphicsContext.h"
 
 #include <GLFW/glfw3.h>
 namespace Helix {
-
 	class WindowsWindow : public Window
 	{
 	public:
@@ -43,5 +41,4 @@ namespace Helix {
 
 		WindowData m_Data;
 	};
-
 }
