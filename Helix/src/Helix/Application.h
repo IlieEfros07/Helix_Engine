@@ -9,6 +9,7 @@
 
 #include "Helix/ImGui/ImGuiLayer.h"
 
+#include "Helix/Renderer/Shader.h"
 
 namespace Helix {
 
@@ -40,6 +41,7 @@ namespace Helix {
 
 
 		unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
+		std::unique_ptr<Shader> m_Shader;
 
 	private:
 		static Application* s_Instance;
