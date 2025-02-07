@@ -93,13 +93,40 @@
     <ClInclude Include="src\Helix\MouseButtonCodes.h">
       <Filter>src\Helix</Filter>
     </ClInclude>
+    <ClInclude Include="src\Helix\Renderer\Buffer.h">
+      <Filter>src\Helix\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Helix\Renderer\GraphicsContext.h">
+      <Filter>src\Helix\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Helix\Renderer\RenderCommand.h">
+      <Filter>src\Helix\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Helix\Renderer\Renderer.h">
+      <Filter>src\Helix\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Helix\Renderer\RendererAPI.h">
+      <Filter>src\Helix\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Helix\Renderer\Shader.h">
+      <Filter>src\Helix\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Helix\Renderer\VertexArray.h">
       <Filter>src\Helix\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Helix\Window.h">
       <Filter>src\Helix</Filter>
     </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsInput.h">
@@ -1365,12 +1392,6 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
-    <ClInclude Include="src\Helix\Renderer\Shader.h" />
-    <ClInclude Include="src\Helix\Renderer\Buffer.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
-    <ClInclude Include="src\Helix\Renderer\Renderer.h" />
-    <ClInclude Include="src\Helix\Renderer\VertexArray.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Helix\Application.cpp">
@@ -1391,7 +1412,34 @@
     <ClCompile Include="src\Helix\Log.cpp">
       <Filter>src\Helix</Filter>
     </ClCompile>
+    <ClCompile Include="src\Helix\Renderer\Buffer.cpp">
+      <Filter>src\Helix\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Helix\Renderer\RenderCommand.cpp">
+      <Filter>src\Helix\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Helix\Renderer\Renderer.cpp">
+      <Filter>src\Helix\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Helix\Renderer\RendererAPI.cpp">
+      <Filter>src\Helix\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Helix\Renderer\Shader.cpp">
+      <Filter>src\Helix\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Helix\Renderer\VertexArray.cpp">
+      <Filter>src\Helix\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
@@ -1403,11 +1451,5 @@
     <ClCompile Include="src\hxpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Helix\Renderer\Shader.cpp" />
-    <ClCompile Include="src\Helix\Renderer\Buffer.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
-    <ClCompile Include="src\Helix\Renderer\Renderer.cpp" />
-    <ClCompile Include="src\Helix\Renderer\VertexArray.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
   </ItemGroup>
 </Project>
