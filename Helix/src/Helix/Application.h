@@ -11,6 +11,8 @@
 #include "Helix/Renderer/Shader.h"
 #include "Helix/Renderer/Buffer.h"
 #include "Helix/Renderer/VertexArray.h"
+#include "Helix/Renderer/OrthographicCamera.h"
+
 
 namespace Helix {
 	class HELIX_API Application
@@ -45,6 +47,8 @@ namespace Helix {
 
 		std::shared_ptr<Shader> m_BlueShader;
 		std::shared_ptr<VertexArray> m_SquareVA;
+
+		OrthographicCamera m_Camera;
 
 
 	private:
