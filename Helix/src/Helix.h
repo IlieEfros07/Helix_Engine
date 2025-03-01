@@ -3,9 +3,12 @@
 
 //For use by Helix Applications
 
+
 #include "Helix/Application.h"
 #include "Helix/Layer.h"
 #include "Helix/Log.h"
+
+#include "Helix/Core/Timestep.h"
 
 #include "Helix/Input.h"
 #include "helix/KeyCodes.h"

@@ -2,6 +2,7 @@
 
 #include "Helix/Core.h"
 #include "Helix/Events/Event.h"
+#include "Helix/Core/Timestep.h"
 
 namespace Helix {
 	class HELIX_API Layer {
@@ -11,7 +12,7 @@ namespace Helix {
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
-		virtual void OnUpdate() {}
+		virtual void OnUpdate(Timestep ts) {}
 		virtual void OnImGuiRender() {}
 		virtual void OnEvent(Event& event) {}
 

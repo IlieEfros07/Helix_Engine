@@ -6,12 +6,10 @@
 #include "Helix/LayerStack.h"
 #include "Events/Event.h"
 #include "Helix/Events/ApplicationEvent.h"
+#include "Helix/Core/Timestep.h"
 
 #include "Helix/ImGui/ImGuiLayer.h"
-#include "Helix/Renderer/Shader.h"
-#include "Helix/Renderer/Buffer.h"
-#include "Helix/Renderer/VertexArray.h"
-#include "Helix/Renderer/OrthographicCamera.h"
+
 
 
 namespace Helix {
@@ -33,12 +31,15 @@ namespace Helix {
 		inline static Application& Get() { return *s_Instance; }
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
+	private:
 
 		std::unique_ptr<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
 
 		bool m_Running = true;
 		LayerStack m_LayerStack;
+		float m_LastFrameTime = 0.0f;
+
 
 
 

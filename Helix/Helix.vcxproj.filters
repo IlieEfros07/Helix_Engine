@@ -1393,6 +1393,7 @@
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
     <ClInclude Include="src\Helix\Renderer\OrthographicCamera.h" />
+    <ClInclude Include="src\Helix\Core\Timestep.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Helix\Application.cpp">

@@ -152,6 +152,7 @@
     <ClInclude Include="src\Helix.h" />
     <ClInclude Include="src\Helix\Application.h" />
     <ClInclude Include="src\Helix\Core.h" />
+    <ClInclude Include="src\Helix\Core\Timestep.h" />
     <ClInclude Include="src\Helix\EntryPoint.h" />
     <ClInclude Include="src\Helix\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Helix\Events\Event.h" />
