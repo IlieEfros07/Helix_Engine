@@ -1,67 +1,38 @@
 #include <Helix.h>
 
+#include "Platform/OpenGL/OpenGLShader.h"
+
 #include "imgui.h"
+
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+
 
 class ExampleLayer : public Helix::Layer {
 public:
 	ExampleLayer() : Layer("Example"),  m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition(0.0f){
 
-
 		m_VertexArray.reset(Helix::VertexArray::Create());
 
 		float vertices[3 * 7] = {
-			-0.5f,-0.5f,0.0f,0.8f,0.2f,0.8f,1.0f,
-			0.5f, -0.5f,0.0f,0.2f,0.3f,0.8f,1.0f,
-			0.0f, 0.5f,0.0f,0.8f,0.8f,0.2f,1.0f
+			-0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
+			 0.5f, -0.5f, 0.0f, 0.2f, 0.3f, 0.8f, 1.0f,
+			 0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f
 		};
 
-		std::shared_ptr<Helix::VertexBuffer>vertexBuffer;
+		std::shared_ptr<Helix::VertexBuffer> vertexBuffer;
 		vertexBuffer.reset(Helix::VertexBuffer::Create(vertices, sizeof(vertices)));
 		Helix::BufferLayout layout = {
-			{Helix::ShaderDataType::Float3,"a_Position"},
-			{Helix::ShaderDataType::Float4,"a_Color"}
+			{ Helix::ShaderDataType::Float3, "a_Position" },
+			{ Helix::ShaderDataType::Float4, "a_Color" }
 		};
 		vertexBuffer->SetLayout(layout);
 		m_VertexArray->AddVertexBuffer(vertexBuffer);
 
-		uint32_t indices[3] = { 0,1,2 };
-		std::shared_ptr<Helix::IndexBuffer>indexBuffer;
+		uint32_t indices[3] = { 0, 1, 2 };
+		std::shared_ptr<Helix::IndexBuffer> indexBuffer;
 		indexBuffer.reset(Helix::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
-
-		std::string triangleShaderVertexSrc = R"(
-			#version 330 core
-			layout(location = 0) in vec3 a_Position;
-			layout(location = 1) in vec4 a_Color;
-	
-			uniform mat4 u_ViewProjection;		
-			uniform mat4 u_Transform;		
-
-
-			out vec4 v_Color;
-    
-			void main() {
-				v_Color = a_Color;
-				gl_Position = u_ViewProjection*u_Transform * vec4(a_Position, 1.0);	
-			}
-		)";
-
-		std::string triangleShaderFragmentSrc = R"(
-			#version 330 core
-			layout(location = 0) out vec4 color;
-    
-			in vec4 v_Color;
-    
-			void main() {
-				color = v_Color;
-			}
-		)";
-
-		m_Shader.reset(new Helix::Shader(triangleShaderVertexSrc, triangleShaderFragmentSrc));
-
-
 
 		m_SquareVA.reset(Helix::VertexArray::Create());
 
@@ -85,33 +56,76 @@ public:
 		squareIB.reset(Helix::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 		m_SquareVA->SetIndexBuffer(squareIB);
 
-		std::string flatColorVertexSrc = R"(
+		std::string vertexSrc = R"(
 			#version 330 core
+			
 			layout(location = 0) in vec3 a_Position;
-	
-			uniform mat4 u_ViewProjection;		
-			uniform mat4 u_Transform;	
+			layout(location = 1) in vec4 a_Color;
+
+			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
 
 			out vec3 v_Position;
-			void main() {
+			out vec4 v_Color;
+
+			void main()
+			{
+				v_Position = a_Position;
+				v_Color = a_Color;
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);	
+			}
+		)";
+
+		std::string fragmentSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) out vec4 color;
+
+			in vec3 v_Position;
+			in vec4 v_Color;
+
+			void main()
+			{
+				color = vec4(v_Position * 0.5 + 0.5, 1.0);
+				color = v_Color;
+			}
+		)";
+
+		m_Shader.reset(Helix::Shader::Create(vertexSrc, fragmentSrc));
+
+		std::string flatColorShaderVertexSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) in vec3 a_Position;
+
+			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
+
+			out vec3 v_Position;
+
+			void main()
+			{
 				v_Position = a_Position;
 				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);	
 			}
 		)";
 
-		std::string flatColorFragmentSrc = R"(
+		std::string flatColorShaderFragmentSrc = R"(
 			#version 330 core
+			
 			layout(location = 0) out vec4 color;
+
 			in vec3 v_Position;
+			
+			uniform vec3 u_Color;
 
-			uniform vec4 u_Color;			
-
-			void main() {
-				color = u_Color;
+			void main()
+			{
+				color = vec4(u_Color, 1.0);
 			}
 		)";
 
-		m_BlueShader.reset(new Helix::Shader(flatColorVertexSrc, flatColorFragmentSrc));
+		m_FlatColorShader.reset(Helix::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
 
 	}
 	void OnUpdate(Helix::Timestep ts) override {
@@ -154,14 +168,19 @@ public:
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
 
+		std::dynamic_pointer_cast<Helix::OpenGLShader>(m_FlatColorShader)->Bind();
+		std::dynamic_pointer_cast<Helix::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat3("u_Color",m_SquareColor);
+
 
 		for (int y = 0;y < 20;y++) {
 			for (int x = 0;x < 20;x++) {
 
+
+
+
 				glm::vec3 pos(x * 0.11f,y * 0.11f, 0.0f);
 				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
-				Helix::Renderer::Submit(m_BlueShader, m_SquareVA, transform);
-				m_BlueShader->UploadUniformFloat4("u_Color", (x % 2 == 0) ? redColor : blueColor);
+				Helix::Renderer::Submit(m_FlatColorShader, m_SquareVA, transform);
 			}
 		}
 		Helix::Renderer::Submit(m_Shader, m_VertexArray);
@@ -170,9 +189,8 @@ public:
 	}
 
 	void OnImGuiRender() override {
-		ImGui::Begin("Debug");
-		ImGui::SliderFloat4("Color Slider", glm::value_ptr(redColor), 0.0f, 1.0f);
-		ImGui::SliderFloat4("Blue Color Slider", glm::value_ptr(blueColor), 0.0f, 1.0f);
+		ImGui::Begin("Settings");
+		ImGui::ColorEdit3("Square Color",glm::value_ptr(m_SquareColor));
 		ImGui::End();
 	}
 
@@ -186,7 +204,7 @@ private:
 	std::shared_ptr<Helix::VertexArray> m_VertexArray;
 
 
-	std::shared_ptr<Helix::Shader> m_BlueShader;
+	std::shared_ptr<Helix::Shader> m_FlatColorShader;
 	std::shared_ptr<Helix::VertexArray> m_SquareVA;
 
 	Helix::OrthographicCamera m_Camera;
@@ -195,8 +213,9 @@ private:
 
 	float m_CameraRotationSpeed =180.0f;
 	float m_CameraRotation = 0.0f;
-	glm::vec4 redColor = glm::vec4(0.8f, 0.2f, 0.3f, 1.0f);
-	glm::vec4 blueColor = glm::vec4(0.2f, 0.3f, 0.8f, 1.0f);
+	glm::vec3 m_SquareColor = { 0.2f,0.3f,0.8f };
+
+
 
 	
 
