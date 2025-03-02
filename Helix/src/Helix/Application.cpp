@@ -54,6 +54,8 @@ namespace Helix {
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
 
+
+
 			for (Layer* layer : m_LayerStack) layer->OnUpdate(timestep);
 
 			m_ImGuiLayer->Begin();
