@@ -25,6 +25,7 @@
 
 #include "Helix/Renderer/Buffer.h"
 #include "Helix/Renderer/Shader.h"
+#include "Helix/Renderer/Texture.h"
 #include "Helix/Renderer/VertexArray.h"
 
 #include "Helix/Renderer/OrthographicCamera.h"

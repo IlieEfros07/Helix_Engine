@@ -22,6 +22,8 @@ IncludeDir["GLFW"] = "Helix/vendor/GLFW/include"
 IncludeDir["Glad"] = "Helix/vendor/Glad/include"
 IncludeDir["imgui"] = "Helix/vendor/imgui"
 IncludeDir["glm"] = "Helix/vendor/glm/"
+IncludeDir["stb_image"] = "Helix/vendor/stb_image"
+
 
 
 include "Helix/vendor/GLFW"
@@ -52,6 +54,8 @@ project "Helix"
     files{
         "%{prj.name}/src/**.h",
         "%{prj.name}/src/**.cpp",
+        "%{prj.name}/vendor/stb_image/**.h",
+        "%{prj.name}/vendor/stb_image/**.cpp",
         "%{prj.name}/vendor/glm/glm/**.hpp",
         "%{prj.name}/vendor/glm/glm/**.inl"
 
@@ -64,7 +68,9 @@ project "Helix"
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.Glad}",
         "%{IncludeDir.imgui}",
-        "%{IncludeDir.glm}"
+        "%{IncludeDir.glm}",
+        "%{IncludeDir.stb_image}"
+
 
     }
 

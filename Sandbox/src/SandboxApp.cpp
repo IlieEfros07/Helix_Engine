@@ -36,18 +36,20 @@ public:
 
 		m_SquareVA.reset(Helix::VertexArray::Create());
 
-		float squareVertices[3 * 4] = {
-			-0.5f, -0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			 0.5f,  0.5f, 0.0f,
-			-0.5f,  0.5f, 0.0f
+		float squareVertices[5 * 4] = {
+			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+			 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
 		};
 
 		Helix::Ref<Helix::VertexBuffer> squareVB;
 		squareVB.reset(Helix::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 		Helix::BufferLayout squareLayout = {
-			{ Helix::ShaderDataType::Float3, "a_Position" }
+			{ Helix::ShaderDataType::Float3, "a_Position" },
+			{ Helix::ShaderDataType::Float2, "a_TexCoord" }
 		};
+
 		squareVB->SetLayout(squareLayout);
 		m_SquareVA->AddVertexBuffer(squareVB);
 
@@ -127,22 +129,55 @@ public:
 
 		m_FlatColorShader.reset(Helix::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
 
+		std::string textureShaderVertexSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) in vec3 a_Position;
+			layout(location = 1) in vec2 a_TexCoord;
+
+			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
+
+			out vec2 v_TexCoord;
+
+			void main()
+			{
+				v_TexCoord = a_TexCoord;
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);	
+			}
+		)";
+
+		std::string textureShaderFragmentSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) out vec4 color;
+
+			in vec2 v_TexCoord;
+			
+			uniform sampler2D u_Texture;
+
+			void main()
+			{
+				color = texture(u_Texture, v_TexCoord);
+			}
+		)";
+
+		m_TextureShader.reset(Helix::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
+
+		m_Texture = Helix::Texture2D::Create("assets/textures/City-Night.png");
+		std::dynamic_pointer_cast<Helix::OpenGLShader>(m_TextureShader)->Bind();
+		std::dynamic_pointer_cast<Helix::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
 	}
 	void OnUpdate(Helix::Timestep ts) override {
 
-
-
-
-		if (Helix::Input::IsKeyPressed(HX_KEY_LEFT)) 
-			m_CameraPosition.x -= m_CameraMoveSpeed*ts;
-		
-		else if (Helix::Input::IsKeyPressed(HX_KEY_RIGHT)) 
+		if (Helix::Input::IsKeyPressed(HX_KEY_LEFT))
+			m_CameraPosition.x -= m_CameraMoveSpeed * ts;
+		else if (Helix::Input::IsKeyPressed(HX_KEY_RIGHT))
 			m_CameraPosition.x += m_CameraMoveSpeed * ts;
-		
-		if (Helix::Input::IsKeyPressed(HX_KEY_UP)) 
+
+		if (Helix::Input::IsKeyPressed(HX_KEY_UP))
 			m_CameraPosition.y += m_CameraMoveSpeed * ts;
-		
-		else if (Helix::Input::IsKeyPressed(HX_KEY_DOWN)) 
+		else if (Helix::Input::IsKeyPressed(HX_KEY_DOWN))
 			m_CameraPosition.y -= m_CameraMoveSpeed * ts;
 
 		if (Helix::Input::IsKeyPressed(HX_KEY_A))
@@ -150,40 +185,34 @@ public:
 		if (Helix::Input::IsKeyPressed(HX_KEY_D))
 			m_CameraRotation -= m_CameraRotationSpeed * ts;
 
-
-
-
-
-		Helix::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
+		Helix::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		Helix::RenderCommand::Clear();
-
-		
 
 		m_Camera.SetPosition(m_CameraPosition);
 		m_Camera.SetRotation(m_CameraRotation);
-
 
 		Helix::Renderer::BeginScene(m_Camera);
 
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
-
 		std::dynamic_pointer_cast<Helix::OpenGLShader>(m_FlatColorShader)->Bind();
-		std::dynamic_pointer_cast<Helix::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat3("u_Color",m_SquareColor);
+		std::dynamic_pointer_cast<Helix::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat3("u_Color", m_SquareColor);
 
-
-		for (int y = 0;y < 20;y++) {
-			for (int x = 0;x < 20;x++) {
-
-
-
-
-				glm::vec3 pos(x * 0.11f,y * 0.11f, 0.0f);
+		for (int y = 0; y < 20; y++)
+		{
+			for (int x = 0; x < 20; x++)
+			{
+				glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
 				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
 				Helix::Renderer::Submit(m_FlatColorShader, m_SquareVA, transform);
 			}
 		}
-		Helix::Renderer::Submit(m_Shader, m_VertexArray);
+
+		m_Texture->Bind();
+		Helix::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+
+		// Triangle
+		// Helix::Renderer::Submit(m_Shader, m_VertexArray);
 
 		Helix::Renderer::EndScene();
 	}
@@ -204,8 +233,10 @@ private:
 	Helix::Ref<Helix::VertexArray> m_VertexArray;
 
 
-	Helix::Ref<Helix::Shader> m_FlatColorShader;
+	Helix::Ref<Helix::Shader> m_FlatColorShader,m_TextureShader;
 	Helix::Ref<Helix::VertexArray> m_SquareVA;
+
+	Helix::Ref<Helix::Texture2D>m_Texture;
 
 	Helix::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
@@ -214,6 +245,7 @@ private:
 	float m_CameraRotationSpeed =180.0f;
 	float m_CameraRotation = 0.0f;
 	glm::vec3 m_SquareColor = { 0.2f,0.3f,0.8f };
+
 
 
 

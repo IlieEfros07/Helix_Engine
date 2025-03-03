@@ -18,6 +18,6 @@
 
 #include "Helix/Log.h"
 
-#ifdef HX_PLATFORM_WINDOWS
+#ifdef HZ_PLATFORM_WINDOWS
 #include <Windows.h>
 #endif
