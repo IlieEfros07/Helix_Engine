@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #ifdef HX_PLATFOM_WINDOWS
 #if HX_DYNAMIC_LINK
 #ifdef HX_BUILD_DLL
@@ -29,3 +31,20 @@
 #define BIT(x) (1<<x)
 
 #define HX_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
+
+
+namespace Helix {
+
+	template<typename T>
+	using Scope = std::unique_ptr<T>;
+
+	//template<typename T>
+	//class Scope {
+
+	//};   #For the future
+
+	template<typename T>
+	using Ref = std::shared_ptr<T>;
+
+
+}
