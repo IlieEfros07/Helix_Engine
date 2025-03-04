@@ -165,7 +165,10 @@ public:
 		m_TextureShader.reset(Helix::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
 
 		m_Texture = Helix::Texture2D::Create("assets/textures/Checkerboard.png");
+<<<<<<< HEAD
 		m_LogoTexture = Helix::Texture2D::Create("assets/logo/Helix_Logo.png");
+=======
+>>>>>>> be7c4628d2b1fe7b238d6a0ab5a7b84a58e8a584
 		std::dynamic_pointer_cast<Helix::OpenGLShader>(m_TextureShader)->Bind();
 		std::dynamic_pointer_cast<Helix::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
 	}
