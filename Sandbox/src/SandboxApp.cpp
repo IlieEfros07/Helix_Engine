@@ -164,7 +164,8 @@ public:
 
 		m_TextureShader.reset(Helix::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
 
-		m_Texture = Helix::Texture2D::Create("assets/textures/City-Night.png");
+		m_Texture = Helix::Texture2D::Create("assets/textures/Checkerboard.png");
+		m_LogoTexture = Helix::Texture2D::Create("assets/logo/Helix_Logo.png");
 		std::dynamic_pointer_cast<Helix::OpenGLShader>(m_TextureShader)->Bind();
 		std::dynamic_pointer_cast<Helix::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
 	}
@@ -211,6 +212,9 @@ public:
 		m_Texture->Bind();
 		Helix::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
+		m_LogoTexture->Bind();
+		Helix::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+
 		// Triangle
 		// Helix::Renderer::Submit(m_Shader, m_VertexArray);
 
@@ -236,7 +240,8 @@ private:
 	Helix::Ref<Helix::Shader> m_FlatColorShader,m_TextureShader;
 	Helix::Ref<Helix::VertexArray> m_SquareVA;
 
-	Helix::Ref<Helix::Texture2D>m_Texture;
+	Helix::Ref<Helix::Texture2D>m_Texture, m_LogoTexture;
+
 
 	Helix::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
