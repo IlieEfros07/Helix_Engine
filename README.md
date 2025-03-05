@@ -1,5 +1,5 @@
-# Helix Game Engine
-![Helix Logo](https://github.com/user-attachments/assets/250b6788-f9ff-41bc-bd98-434d3d76b7a2)
+
+![Helix_Logo](https://github.com/user-attachments/assets/2c1da0f7-e3e3-4a02-b6ea-8e31c4e1a9f6)
 
 ## Overview
 Helix is a modern, high-performance game engine designed to provide developers with a powerful, flexible, and extensible framework for creating interactive experiences across multiple platforms.
