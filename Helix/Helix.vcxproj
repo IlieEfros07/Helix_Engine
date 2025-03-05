@@ -165,6 +165,7 @@
     <ClInclude Include="src\Helix\LayerStack.h" />
     <ClInclude Include="src\Helix\Log.h" />
     <ClInclude Include="src\Helix\MouseButtonCodes.h" />
+    <ClInclude Include="src\Helix\OrthographicCameraController.h" />
     <ClInclude Include="src\Helix\Renderer\Buffer.h" />
     <ClInclude Include="src\Helix\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Helix\Renderer\OrthographicCamera.h" />
@@ -611,6 +612,7 @@
     <ClCompile Include="src\Helix\Layer.cpp" />
     <ClCompile Include="src\Helix\LayerStack.cpp" />
     <ClCompile Include="src\Helix\Log.cpp" />
+    <ClCompile Include="src\Helix\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Helix\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Helix\Renderer\OrthographicCamera.cpp" />
     <ClCompile Include="src\Helix\Renderer\RenderCommand.cpp" />

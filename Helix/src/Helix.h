@@ -29,6 +29,7 @@
 #include "Helix/Renderer/VertexArray.h"
 
 #include "Helix/Renderer/OrthographicCamera.h"
+#include "Helix/OrthographicCameraController.h"
 
 
 // --Entry Point--------------------
