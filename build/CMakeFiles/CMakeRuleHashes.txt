@@ -1,0 +1,21 @@
+# Hashes of file build rules.
+c884c24102114ccff356211c53b15b4c Helix/vendor/GLFW/CMakeFiles/uninstall
+2db680a095715f4b5bf7f7c8b965422a Helix/vendor/GLFW/src/CMakeFiles/update_mappings
+6fddcad80df3d1865deefac22e365464 Helix/vendor/GLFW/src/fractional-scale-v1-client-protocol-code.h
+751c439ec9928e3403f9f8f926e67487 Helix/vendor/GLFW/src/fractional-scale-v1-client-protocol.h
+534e6a25499bd31d3b6907c932c174f9 Helix/vendor/GLFW/src/idle-inhibit-unstable-v1-client-protocol-code.h
+a8f6f025e286c5b4178e9decd47c34f5 Helix/vendor/GLFW/src/idle-inhibit-unstable-v1-client-protocol.h
+d93b3bfd7ec549fd3a1b234e06137290 Helix/vendor/GLFW/src/pointer-constraints-unstable-v1-client-protocol-code.h
+85e122a6b7ccc3638a69e50d3b79074f Helix/vendor/GLFW/src/pointer-constraints-unstable-v1-client-protocol.h
+51324ceeab53dbf757584137fca0d671 Helix/vendor/GLFW/src/relative-pointer-unstable-v1-client-protocol-code.h
+1e237d33f90b2fed21135c0f012260fb Helix/vendor/GLFW/src/relative-pointer-unstable-v1-client-protocol.h
+e194a5529b9ba70dbfd50d2c2023a69f Helix/vendor/GLFW/src/viewporter-client-protocol-code.h
+903fdbf854f2fd8b6a13e8389e55b8a0 Helix/vendor/GLFW/src/viewporter-client-protocol.h
+0227cf650f2199ea496aeef0f7a3cc97 Helix/vendor/GLFW/src/wayland-client-protocol-code.h
+82419059775a101e3aefe177ff1951b9 Helix/vendor/GLFW/src/wayland-client-protocol.h
+99ea56ab27d9e41989475a6deab362a6 Helix/vendor/GLFW/src/xdg-activation-v1-client-protocol-code.h
+1ed1ec405f4c30bbf79a64a15560a5e3 Helix/vendor/GLFW/src/xdg-activation-v1-client-protocol.h
+d6a8124adc0770382ca4465d815c15dd Helix/vendor/GLFW/src/xdg-decoration-unstable-v1-client-protocol-code.h
+86bb3273f5c6a5a94938acd590ca1486 Helix/vendor/GLFW/src/xdg-decoration-unstable-v1-client-protocol.h
+27bbbc9283cb870d1fc64dfff4ffcb50 Helix/vendor/GLFW/src/xdg-shell-client-protocol-code.h
+0897d72ab2096faa6caa09e088bfe8c7 Helix/vendor/GLFW/src/xdg-shell-client-protocol.h
