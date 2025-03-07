@@ -90,9 +90,20 @@ project "Helix"
         "kernel32.lib"
 
     }
+
+    filter "system:linux"
+		removefiles { "src/Platform/Windows/WindowsPlatformUtils.cpp" }
+
+		defines
+		{
+			"HZ_PLATFORM_LINUX",
+		}
+
+
     filter "system:windows"
         buildoptions { "/utf-8" }
         systemversion "latest"
+        removefiles { "**/Linux/**" }
 
         defines{
                 "HX_PLATFOM_WINDOWS",
